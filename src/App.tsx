@@ -1,16 +1,51 @@
 import { useEffect, useState } from 'react'
 import { marked } from 'marked'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github.css'
 import { Github, Twitter, Linkedin, Code2, BookOpen, Target, Zap } from 'lucide-react'
 import 'github-markdown-css/github-markdown-light.css'
 
 const markdowns = import.meta.glob('./dsa/**/*.md', { as: 'raw' })
-const modules = import.meta.glob('./dsa/**/*.ts')
+const modules = import.meta.glob('./dsa/**/*.ts', { eager: false })
 
 type TopicId = 'warm-up' | 'arrays' | 'strings' | 'linked-lists'
 
+
+const renderer = new marked.Renderer()
+
+renderer.code = function (code, language) {
+  const validLang = hljs.getLanguage(language) ? language : 'plaintext'
+
+  try {
+    const highlighted = hljs.highlight(code, { language: validLang }).value
+    return `<pre><code class="hljs language-${validLang}">${highlighted}</code></pre>`
+  } catch (err) {
+    console.warn(`⚠️ Highlighting failed for language "${language}":`, err)
+    return `<pre><code class="hljs">${code}</code></pre>`
+  }
+}
+
+marked.setOptions({
+  renderer,
+  gfm: true,
+  breaks: true
+})
+
+
 function App() {
-  const [topic, setTopic] = useState<TopicId | null>(null)
-  const [subtopic, setSubtopic] = useState<string | null>(null)
+  const [topic, setTopic] = useState<TopicId | null>(() => {
+    const hash = window.location.hash.substring(1)
+    if (!hash) return null
+    const [t] = hash.split('/')
+    return t as TopicId || null
+  })
+
+  const [subtopic, setSubtopic] = useState<string | null>(() => {
+    const hash = window.location.hash.substring(1)
+    if (!hash) return null
+    const [, st] = hash.split('/')
+    return st || null
+  })
   const [readme, setReadme] = useState<string>('')
 
   const topics = [
@@ -42,22 +77,65 @@ function App() {
 
   useEffect(() => {
     if (topic && subtopic) {
+      window.location.hash = `${topic}/${subtopic}`
+    } else if (topic) {
+      window.location.hash = topic
+    } else {
+      window.location.hash = ''
+    }
+  }, [topic, subtopic])
+
+  useEffect(() => {
+    if (topic && subtopic) {
       const modulePath = `./dsa/${topic}/${subtopic}/index.ts`
-      const importFn = modules[modulePath]
-      if (importFn) importFn()
+      const moduleLoader = modules[modulePath]
+      if (moduleLoader) {
+        moduleLoader().then(() => {
+          console.log(`✅ Executed: ${modulePath}`)
+        }).catch((error) => {
+          console.error(`❌ Error importing ${modulePath}:`, error)
+        })
+      }
+
 
       const readmePath = `./dsa/${topic}/README.md`
       const readmeLoader = markdowns[readmePath]
       if (readmeLoader) {
         readmeLoader().then((raw: string) => {
           const parsedContent = marked.parse(raw)
-          setReadme(typeof parsedContent === 'string' ? parsedContent : '')
-        }).catch(() => {
+          console.log(`📄 Loaded README for ${topic}/${subtopic}`, parsedContent)
+          if (typeof parsedContent === 'string') {
+            setReadme(parsedContent)
+          } else {
+            console.warn('Parsed content is not string:', parsedContent)
+            setReadme('')
+          }
+        }).catch((err) => {
+          console.error(`❌ Error loading README for ${topic}/${subtopic}:`, err)
           setReadme('')
         })
       } else {
         setReadme('')
       }
+    }
+  }, [topic, subtopic])
+
+  useEffect(() => {
+    if (import.meta.hot) {
+      import.meta.hot.accept(() => {
+        console.log("♻️ Hot module update detected")
+
+        if (topic && subtopic) {
+          const modulePath = `./dsa/${topic}/${subtopic}/index.ts`
+          const moduleLoader = modules[modulePath]
+
+          if (moduleLoader) {
+            moduleLoader().then(() => {
+              console.log(`🔥 Re-executed after HMR: ${modulePath}`)
+            })
+          }
+        }
+      })
     }
   }, [topic, subtopic])
 
@@ -162,8 +240,8 @@ function App() {
                   key={subtopicItem.id}
                   onClick={() => setSubtopic(subtopicItem.id)}
                   className={`group p-4 rounded-lg border-2 text-left transition-all duration-200 ${subtopic === subtopicItem.id
-                      ? 'border-indigo-500 bg-indigo-50 text-indigo-900'
-                      : 'border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50'
+                    ? 'border-indigo-500 bg-indigo-50 text-indigo-900'
+                    : 'border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50'
                     }`}
                 >
                   <div className="flex items-center justify-between">

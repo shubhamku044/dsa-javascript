@@ -1,6 +1,9 @@
 console.log("Find second largest number in an array")
 
 const arr = [4, 9, 0, 2, 8, 7, 1]
+console.log("Array:", arr)
+console.log("Expected output: 8")
+console.log("shubham")
 
 const findSecondLargest = (arr: number[]) => {
   let firstLargest = Number.NEGATIVE_INFINITY

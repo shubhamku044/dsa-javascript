@@ -80,6 +80,7 @@ function App(): JSX.Element {
       { id: "second-largest", name: "Second Largest Element" },
       { id: "star-pattern", name: "Star Pattern" },
       { id: "count-digits", name: "Count digits" },
+      { id: "palindrome-number", name: "Palindrome Number" },
     ],
     arrays: [
       { id: "sorting", name: "Sorting Algorithms" },

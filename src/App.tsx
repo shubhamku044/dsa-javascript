@@ -79,6 +79,7 @@ function App(): JSX.Element {
     "warm-up": [
       { id: "second-largest", name: "Second Largest Element" },
       { id: "star-pattern", name: "Star Pattern" },
+      { id: "count-digits", name: "Count digits" },
     ],
     arrays: [
       { id: "sorting", name: "Sorting Algorithms" },

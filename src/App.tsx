@@ -2,18 +2,12 @@ import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown-light.css";
 
 import hljs from "highlight.js";
-import {
-  BookOpen,
-  Code2,
-  Github,
-  Linkedin,
-  Target,
-  Twitter,
-  Zap,
-} from "lucide-react";
+import { BookOpen, Target, Zap } from "lucide-react";
 import type { Tokens } from "marked";
 import { marked } from "marked";
 import { type JSX, useEffect, useState } from "react";
+
+import { Footer, Header } from "./components";
 
 const markdowns = import.meta.glob("./dsa/**/*.md", {
   as: "raw",
@@ -61,30 +55,29 @@ function App(): JSX.Element {
       icon: <Zap className="h-5 w-5" />,
       color: "from-orange-400 to-pink-500",
     },
-    {
-      id: "arrays" as const,
-      name: "Arrays",
-      icon: <Code2 className="h-5 w-5" />,
-      color: "from-blue-400 to-indigo-600",
-    },
-    {
-      id: "strings" as const,
-      name: "Strings",
-      icon: <BookOpen className="h-5 w-5" />,
-      color: "from-green-400 to-emerald-600",
-    },
-    {
-      id: "linked-lists" as const,
-      name: "Linked Lists",
-      icon: <Target className="h-5 w-5" />,
-      color: "from-purple-400 to-violet-600",
-    },
+    // {
+    //   id: "arrays" as const,
+    //   name: "Arrays",
+    //   icon: <Code2 className="h-5 w-5" />,
+    //   color: "from-blue-400 to-indigo-600",
+    // },
+    // {
+    //   id: "strings" as const,
+    //   name: "Strings",
+    //   icon: <BookOpen className="h-5 w-5" />,
+    //   color: "from-green-400 to-emerald-600",
+    // },
+    // {
+    //   id: "linked-lists" as const,
+    //   name: "Linked Lists",
+    //   icon: <Target className="h-5 w-5" />,
+    //   color: "from-purple-400 to-violet-600",
+    // },
   ];
 
   const subtopics: Record<TopicId, { id: string; name: string }[]> = {
     "warm-up": [
       { id: "second-largest", name: "Second Largest Element" },
-      { id: "basics", name: "Basic Operations" },
       { id: "star-pattern", name: "Star Pattern" },
     ],
     arrays: [
@@ -186,65 +179,11 @@ function App(): JSX.Element {
     }
   }, [topic, subtopic]);
 
-  const socialLinks = [
-    {
-      icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/shubhamku044",
-      label: "GitHub",
-      color: "hover:text-gray-900",
-    },
-    {
-      icon: <Twitter className="h-5 w-5" />,
-      href: "https://x.com/shubhamku044",
-      label: "Twitter",
-      color: "hover:text-blue-500",
-    },
-    {
-      icon: <Linkedin className="h-5 w-5" />,
-      href: "https://linkedin.com/in/shubhamku044",
-      label: "LinkedIn",
-      color: "hover:text-blue-700",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <header className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/80 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 p-2">
-                <Code2 className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h1 className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-2xl font-bold text-transparent">
-                  DSA Learning Hub
-                </h1>
-                <p className="text-sm text-gray-600">
-                  Master Data Structures & Algorithms
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              {socialLinks.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.href}
-                  className={`rounded-lg bg-gray-100 p-2 text-gray-600 transition-all duration-200 ${link.color} hover:scale-110 hover:bg-gray-200`}
-                  aria-label={link.label}
-                  target="_blank"
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {!topic && (
+        {
           <div className="mb-12 text-center">
             <div className="mb-6 inline-block rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1">
               <div className="rounded-xl bg-white px-8 py-6">
@@ -259,7 +198,7 @@ function App(): JSX.Element {
               </div>
             </div>
           </div>
-        )}
+        }
 
         <div className="mb-8">
           <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
@@ -342,27 +281,7 @@ function App(): JSX.Element {
             </div>
           </div>
         )}
-
-        <footer className="mt-16 border-t border-gray-200 py-8">
-          <div className="text-center">
-            <p className="mb-4 text-gray-600">
-              Built with ❤️ for the developer community
-            </p>
-            <div className="flex justify-center space-x-6">
-              {socialLinks.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.href}
-                  className={`flex items-center space-x-2 text-gray-600 transition-colors ${link.color}`}
-                  target="_blank"
-                >
-                  {link.icon}
-                  <span className="text-sm font-medium">{link.label}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

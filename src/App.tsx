@@ -217,6 +217,36 @@ function App(): JSX.Element {
                   interactive examples, comprehensive explanations, and hands-on
                   coding practice.
                 </p>
+
+                {/* 👇 Add this block below */}
+                <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-4 text-sm text-gray-700 shadow-inner">
+                  <p className="mb-1">
+                    📘 This project is built for my personal reference while
+                    learning from the{" "}
+                    <a
+                      href="https://namastedev.com/learn/namaste-dsa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-600 underline hover:text-indigo-800"
+                    >
+                      Namaste DSA course
+                    </a>{" "}
+                    by Akshay Saini.
+                  </p>
+                  <p>
+                    I created this to revise and practice DSA anywhere, anytime.
+                    If you find it useful, consider checking out the course or{" "}
+                    <a
+                      href="https://github.com/shubhamku044/dsa-javascript"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-600 underline hover:text-indigo-800"
+                    >
+                      contributing on GitHub
+                    </a>
+                    .
+                  </p>
+                </div>
               </div>
             </div>
           </div>

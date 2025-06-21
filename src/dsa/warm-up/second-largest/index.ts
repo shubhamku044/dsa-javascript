@@ -1,5 +1,21 @@
-console.log("Running DSA Warm Up - Second Largest!");
+console.log("Find second largest number in an array")
 
-console.log("hello world");
+const arr = [4, 9, 0, 2, 8, 7, 1]
 
-console.log("hello world 2");
+const findSecondLargest = (arr: number[]) => {
+  let firstLargest = Number.NEGATIVE_INFINITY
+  let secondLargest = Number.NEGATIVE_INFINITY
+
+  arr.forEach((num) => {
+    if (num > firstLargest) {
+      secondLargest = firstLargest
+      firstLargest = num
+    } else if (num > secondLargest) {
+      secondLargest = num
+    }
+  })
+
+  return secondLargest
+}
+
+console.log("Second largest number in arr:", arr, "is:", findSecondLargest(arr))

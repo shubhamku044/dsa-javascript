@@ -1,22 +1,18 @@
 # Warm up
 
-## count digits
+## Palindrome number
 
 ```js
-function countDigits(num) {
-  if (num === 0) return 1;
+const isPalindrome = (num) => {
+  let rev = 0;
+  let temp = num;
 
-  let count = 0;
-  num = Math.abs(num);
-  while (num) {
-    num = Math.floor(num / 10);
-    count++;
+  while (temp) {
+    const rem = temp % 10;
+    rev = rev * 10 + rem;
+    temp = Math.floor(temp / 10);
   }
 
-  return count;
-}
-
-console.log(countDigits(12345)); // Output: 5
-console.log(countDigits(0)); // Output: 1
-console.log(countDigits(100)); // Output: 3
+  return rev === num;
+};
 ```

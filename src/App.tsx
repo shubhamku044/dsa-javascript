@@ -1,207 +1,213 @@
-import { useEffect, useState } from 'react'
-import { marked } from 'marked'
-import type { Tokens } from 'marked'
-import hljs from 'highlight.js'
-import 'highlight.js/styles/github.css'
-import { Github, Twitter, Linkedin, Code2, BookOpen, Target, Zap } from 'lucide-react'
-import 'github-markdown-css/github-markdown-light.css'
+import "highlight.js/styles/github.css";
+import "github-markdown-css/github-markdown-light.css";
 
-const markdowns = import.meta.glob('./dsa/**/*.md', {
-  as: 'raw',
+import hljs from "highlight.js";
+import {
+  BookOpen,
+  Code2,
+  Github,
+  Linkedin,
+  Target,
+  Twitter,
+  Zap,
+} from "lucide-react";
+import type { Tokens } from "marked";
+import { marked } from "marked";
+import { type JSX, useEffect, useState } from "react";
+
+const markdowns = import.meta.glob("./dsa/**/*.md", {
+  as: "raw",
   eager: true,
-})
+});
 
-const modules = import.meta.glob('./dsa/**/*.ts', { eager: false })
+const modules = import.meta.glob("./dsa/**/*.ts", { eager: false });
 
-type TopicId = 'warm-up' | 'arrays' | 'strings' | 'linked-lists'
+type TopicId = "warm-up" | "arrays" | "strings" | "linked-lists";
 
-const renderer = new marked.Renderer()
-renderer.code = function ({ text, lang }: Tokens.Code) {
-  const validLang = lang && hljs.getLanguage(lang) ? lang : 'plaintext'
-  const highlighted = hljs.highlight(text, { language: validLang }).value
-  return `<pre><code class="hljs language-${validLang}">${highlighted}</code></pre>`
-}
+const renderer = new marked.Renderer();
+renderer.code = function ({ text, lang }: Tokens.Code): string {
+  const validLang = lang && hljs.getLanguage(lang) ? lang : "plaintext";
+  const highlighted = hljs.highlight(text, { language: validLang }).value;
+  return `<pre><code class="hljs language-${validLang}">${highlighted}</code></pre>`;
+};
 
 marked.setOptions({
   gfm: true,
   breaks: true,
-})
+});
 
-marked.use({ renderer })
+marked.use({ renderer });
 
-function App() {
+function App(): JSX.Element {
   const [topic, setTopic] = useState<TopicId | null>(() => {
-    const hash = window.location.hash.substring(1)
-    if (!hash) return null
-    const [t] = hash.split('/')
-    return (t as TopicId) || null
-  })
+    const hash = window.location.hash.substring(1);
+    if (!hash) return null;
+    const [t] = hash.split("/");
+    return (t as TopicId) || null;
+  });
 
   const [subtopic, setSubtopic] = useState<string | null>(() => {
-    const hash = window.location.hash.substring(1)
-    if (!hash) return null
-    const [, st] = hash.split('/')
-    return st || null
-  })
-  const [readme, setReadme] = useState<string>('')
+    const hash = window.location.hash.substring(1);
+    if (!hash) return null;
+    const [, st] = hash.split("/");
+    return st || null;
+  });
+  const [readme, setReadme] = useState<string>("");
 
   const topics = [
     {
-      id: 'warm-up' as const,
-      name: 'Warm Up',
+      id: "warm-up" as const,
+      name: "Warm Up",
       icon: <Zap className="h-5 w-5" />,
-      color: 'from-orange-400 to-pink-500',
+      color: "from-orange-400 to-pink-500",
     },
     {
-      id: 'arrays' as const,
-      name: 'Arrays',
+      id: "arrays" as const,
+      name: "Arrays",
       icon: <Code2 className="h-5 w-5" />,
-      color: 'from-blue-400 to-indigo-600',
+      color: "from-blue-400 to-indigo-600",
     },
     {
-      id: 'strings' as const,
-      name: 'Strings',
+      id: "strings" as const,
+      name: "Strings",
       icon: <BookOpen className="h-5 w-5" />,
-      color: 'from-green-400 to-emerald-600',
+      color: "from-green-400 to-emerald-600",
     },
     {
-      id: 'linked-lists' as const,
-      name: 'Linked Lists',
+      id: "linked-lists" as const,
+      name: "Linked Lists",
       icon: <Target className="h-5 w-5" />,
-      color: 'from-purple-400 to-violet-600',
+      color: "from-purple-400 to-violet-600",
     },
-  ]
+  ];
 
   const subtopics: Record<TopicId, { id: string; name: string }[]> = {
-    'warm-up': [
-      { id: 'second-largest', name: 'Second Largest Element' },
-      { id: 'basics', name: 'Basic Operations' },
+    "warm-up": [
+      { id: "second-largest", name: "Second Largest Element" },
+      { id: "basics", name: "Basic Operations" },
     ],
     arrays: [
-      { id: 'sorting', name: 'Sorting Algorithms' },
-      { id: 'searching', name: 'Search Techniques' },
-      { id: 'two-pointers', name: 'Two Pointers' },
+      { id: "sorting", name: "Sorting Algorithms" },
+      { id: "searching", name: "Search Techniques" },
+      { id: "two-pointers", name: "Two Pointers" },
     ],
     strings: [
-      { id: 'pattern-matching', name: 'Pattern Matching' },
-      { id: 'palindromes', name: 'Palindromes' },
+      { id: "pattern-matching", name: "Pattern Matching" },
+      { id: "palindromes", name: "Palindromes" },
     ],
-    'linked-lists': [
-      { id: 'traversal', name: 'Traversal' },
-      { id: 'reversal', name: 'Reversal' },
+    "linked-lists": [
+      { id: "traversal", name: "Traversal" },
+      { id: "reversal", name: "Reversal" },
     ],
-  }
+  };
 
   useEffect(() => {
     if (topic && subtopic) {
-      window.location.hash = `${topic}/${subtopic}`
+      window.location.hash = `${topic}/${subtopic}`;
     } else if (topic) {
-      window.location.hash = topic
+      window.location.hash = topic;
     } else {
-      window.location.hash = ''
+      window.location.hash = "";
     }
-  }, [topic, subtopic])
+  }, [topic, subtopic]);
 
   useEffect(() => {
-    const loadReadme = async () => {
+    const loadReadme = async (): Promise<void> => {
       if (topic && subtopic) {
-        const readmePath = `./dsa/${topic}/README.md`
+        const readmePath = `./dsa/${topic}/README.md`;
         try {
-          // Get the raw content directly from the glob import
-          const readmeContent = markdowns[readmePath] as string
+          const readmeContent = markdowns[readmePath] as string;
           if (readmeContent) {
-            const parsedContent = marked.parse(readmeContent)
-            console.log(`📄 Loaded README for ${topic}/${subtopic}`)
-            if (typeof parsedContent === 'string') {
-              setReadme(parsedContent)
+            const parsedContent = marked.parse(readmeContent);
+            console.log(`📄 Loaded README for ${topic}/${subtopic}`);
+            if (typeof parsedContent === "string") {
+              setReadme(parsedContent);
             } else {
-              console.warn('Parsed content is not string:', parsedContent)
-              setReadme('')
+              console.warn("Parsed content is not string:", parsedContent);
+              setReadme("");
             }
           } else {
-            console.warn(`No content found for ${readmePath}`)
-            setReadme('')
+            console.warn(`No content found for ${readmePath}`);
+            setReadme("");
           }
         } catch (error) {
-          console.error(`Error loading README for ${topic}/${subtopic}:`, error)
-          setReadme('')
+          console.error(
+            `Error loading README for ${topic}/${subtopic}:`,
+            error,
+          );
+          setReadme("");
         }
       }
-    }
+    };
 
-    loadReadme()
+    loadReadme();
 
-    // Execute the module
     if (topic && subtopic) {
-      const modulePath = `./dsa/${topic}/${subtopic}/index.ts`
-      const moduleLoader = modules[modulePath]
+      const modulePath = `./dsa/${topic}/${subtopic}/index.ts`;
+      const moduleLoader = modules[modulePath];
       if (moduleLoader) {
         moduleLoader()
           .then(() => {
-            console.log(`✅ Executed: ${modulePath}`)
+            console.log(`✅ Executed: ${modulePath}`);
           })
           .catch((error) => {
-            console.error(`❌ Error importing ${modulePath}:`, error)
-          })
+            console.error(`❌ Error importing ${modulePath}:`, error);
+          });
       }
     }
-  }, [topic, subtopic])
+  }, [topic, subtopic]);
 
   useEffect(() => {
     if (import.meta.hot) {
-      // Accept updates for all module types
       import.meta.hot.accept(() => {
-        console.log('🔄 Hot update detected')
+        console.log("🔄 Hot update detected");
 
         if (topic && subtopic) {
-          // Reload README content
-          const readmePath = `./dsa/${topic}/README.md`
-          const readmeContent = markdowns[readmePath] as string
+          const readmePath = `./dsa/${topic}/README.md`;
+          const readmeContent = markdowns[readmePath] as string;
           if (readmeContent) {
-            const parsedContent = marked.parse(readmeContent)
-            console.log(`📝 Updated README content for ${topic}/${subtopic}`)
-            if (typeof parsedContent === 'string') {
-              setReadme(parsedContent)
+            const parsedContent = marked.parse(readmeContent);
+            console.log(`📝 Updated README content for ${topic}/${subtopic}`);
+            if (typeof parsedContent === "string") {
+              setReadme(parsedContent);
             }
           }
 
-          // Reload TypeScript module
-          const modulePath = `./dsa/${topic}/${subtopic}/index.ts`
-          const moduleLoader = modules[modulePath]
+          const modulePath = `./dsa/${topic}/${subtopic}/index.ts`;
+          const moduleLoader = modules[modulePath];
           if (moduleLoader) {
             moduleLoader().then(() => {
-              console.log(`🔥 Re-executed after HMR: ${modulePath}`)
-            })
+              console.log(`🔥 Re-executed after HMR: ${modulePath}`);
+            });
           }
         }
-      })
+      });
     }
-  }, [topic, subtopic])
+  }, [topic, subtopic]);
 
   const socialLinks = [
     {
       icon: <Github className="h-5 w-5" />,
-      href: 'https://github.com/shubhamku044',
-      label: 'GitHub',
-      color: 'hover:text-gray-900',
+      href: "https://github.com/shubhamku044",
+      label: "GitHub",
+      color: "hover:text-gray-900",
     },
     {
       icon: <Twitter className="h-5 w-5" />,
-      href: 'https://x.com/shubhamku044',
-      label: 'Twitter',
-      color: 'hover:text-blue-500',
+      href: "https://x.com/shubhamku044",
+      label: "Twitter",
+      color: "hover:text-blue-500",
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
-      href: 'https://linkedin.com/in/shubhamku044',
-      label: 'LinkedIn',
-      color: 'hover:text-blue-700',
+      href: "https://linkedin.com/in/shubhamku044",
+      label: "LinkedIn",
+      color: "hover:text-blue-700",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/80 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -213,7 +219,9 @@ function App() {
                 <h1 className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-2xl font-bold text-transparent">
                   DSA Learning Hub
                 </h1>
-                <p className="text-sm text-gray-600">Master Data Structures & Algorithms</p>
+                <p className="text-sm text-gray-600">
+                  Master Data Structures & Algorithms
+                </p>
               </div>
             </div>
 
@@ -235,7 +243,6 @@ function App() {
       </header>
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Welcome Section */}
         {!topic && (
           <div className="mb-12 text-center">
             <div className="mb-6 inline-block rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1">
@@ -244,15 +251,15 @@ function App() {
                   Welcome to Your DSA Journey! 🚀
                 </h2>
                 <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                  Dive into the world of Data Structures and Algorithms with interactive examples,
-                  comprehensive explanations, and hands-on coding practice.
+                  Dive into the world of Data Structures and Algorithms with
+                  interactive examples, comprehensive explanations, and hands-on
+                  coding practice.
                 </p>
               </div>
             </div>
           </div>
         )}
 
-        {/* Topics Grid */}
         <div className="mb-8">
           <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
             <BookOpen className="mr-2 h-6 w-6 text-indigo-600" />
@@ -263,11 +270,13 @@ function App() {
               <button
                 key={topicItem.id}
                 onClick={() => {
-                  setTopic(topicItem.id)
-                  setSubtopic(null)
+                  setTopic(topicItem.id);
+                  setSubtopic(null);
                 }}
                 className={`group relative overflow-hidden rounded-xl bg-gradient-to-r p-6 ${topicItem.color} text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                  topic === topicItem.id ? 'ring-opacity-50 scale-105 ring-4 ring-white' : ''
+                  topic === topicItem.id
+                    ? "ring-opacity-50 scale-105 ring-4 ring-white"
+                    : ""
                 }`}
               >
                 <div className="mb-3 flex items-center justify-between">
@@ -283,7 +292,6 @@ function App() {
           </div>
         </div>
 
-        {/* Subtopics */}
         {topic && subtopics[topic] && (
           <div className="mb-8">
             <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
@@ -297,8 +305,8 @@ function App() {
                   onClick={() => setSubtopic(subtopicItem.id)}
                   className={`group rounded-lg border-2 p-4 text-left transition-all duration-200 ${
                     subtopic === subtopicItem.id
-                      ? 'border-indigo-500 bg-indigo-50 text-indigo-900'
-                      : 'border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50'
+                      ? "border-indigo-500 bg-indigo-50 text-indigo-900"
+                      : "border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -306,8 +314,8 @@ function App() {
                     <div
                       className={`h-3 w-3 rounded-full transition-colors ${
                         subtopic === subtopicItem.id
-                          ? 'bg-indigo-500'
-                          : 'bg-gray-300 group-hover:bg-indigo-400'
+                          ? "bg-indigo-500"
+                          : "bg-gray-300 group-hover:bg-indigo-400"
                       }`}
                     ></div>
                   </div>
@@ -317,7 +325,6 @@ function App() {
           </div>
         )}
 
-        {/* Content Area */}
         {readme && (
           <div className="overflow-hidden rounded-xl border border-gray-200/50 bg-white shadow-lg">
             <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4">
@@ -335,10 +342,11 @@ function App() {
           </div>
         )}
 
-        {/* Footer */}
         <footer className="mt-16 border-t border-gray-200 py-8">
           <div className="text-center">
-            <p className="mb-4 text-gray-600">Built with ❤️ for the developer community</p>
+            <p className="mb-4 text-gray-600">
+              Built with ❤️ for the developer community
+            </p>
             <div className="flex justify-center space-x-6">
               {socialLinks.map((link, idx) => (
                 <a
@@ -356,7 +364,7 @@ function App() {
         </footer>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

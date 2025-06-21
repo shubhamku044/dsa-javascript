@@ -14,6 +14,8 @@ const reverseInt = (num: number): number => {
     num = Math.floor(num / 10);
   }
 
+  if (rev < -limit || rev > limit) return 0;
+
   return isNegative ? -1 * rev : rev;
 };
 console.log(reverseInt(120));

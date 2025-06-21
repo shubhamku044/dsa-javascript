@@ -9,7 +9,7 @@ This project helps me revise and practice Data Structures & Algorithms anywhere,
 
 ## 📸 Preview
 
-![screenshot](https://github.com/shubhamku044/dsa-javascript/assets/preview.png)
+![screenshot](./src/assets/preview.png)
 
 ---
 

@@ -6,38 +6,35 @@ import 'highlight.js/styles/github.css'
 import { Github, Twitter, Linkedin, Code2, BookOpen, Target, Zap } from 'lucide-react'
 import 'github-markdown-css/github-markdown-light.css'
 
-// Import markdowns with glob pattern
-const markdowns = import.meta.glob('./dsa/**/*.md', { 
+const markdowns = import.meta.glob('./dsa/**/*.md', {
   as: 'raw',
-  eager: true 
+  eager: true,
 })
 
 const modules = import.meta.glob('./dsa/**/*.ts', { eager: false })
 
 type TopicId = 'warm-up' | 'arrays' | 'strings' | 'linked-lists'
 
-// Configure the renderer
-const renderer = new marked.Renderer();
-renderer.code = function({ text, lang }: Tokens.Code) {
-  const validLang = lang && hljs.getLanguage(lang) ? lang : 'plaintext';
-  const highlighted = hljs.highlight(text, { language: validLang }).value;
-  return `<pre><code class="hljs language-${validLang}">${highlighted}</code></pre>`;
-};
+const renderer = new marked.Renderer()
+renderer.code = function ({ text, lang }: Tokens.Code) {
+  const validLang = lang && hljs.getLanguage(lang) ? lang : 'plaintext'
+  const highlighted = hljs.highlight(text, { language: validLang }).value
+  return `<pre><code class="hljs language-${validLang}">${highlighted}</code></pre>`
+}
 
-// Configure marked options
 marked.setOptions({
   gfm: true,
-  breaks: true
-});
+  breaks: true,
+})
 
-marked.use({ renderer });
+marked.use({ renderer })
 
 function App() {
   const [topic, setTopic] = useState<TopicId | null>(() => {
     const hash = window.location.hash.substring(1)
     if (!hash) return null
     const [t] = hash.split('/')
-    return t as TopicId || null
+    return (t as TopicId) || null
   })
 
   const [subtopic, setSubtopic] = useState<string | null>(() => {
@@ -49,30 +46,50 @@ function App() {
   const [readme, setReadme] = useState<string>('')
 
   const topics = [
-    { id: 'warm-up' as const, name: 'Warm Up', icon: <Zap className="w-5 h-5" />, color: 'from-orange-400 to-pink-500' },
-    { id: 'arrays' as const, name: 'Arrays', icon: <Code2 className="w-5 h-5" />, color: 'from-blue-400 to-indigo-600' },
-    { id: 'strings' as const, name: 'Strings', icon: <BookOpen className="w-5 h-5" />, color: 'from-green-400 to-emerald-600' },
-    { id: 'linked-lists' as const, name: 'Linked Lists', icon: <Target className="w-5 h-5" />, color: 'from-purple-400 to-violet-600' }
+    {
+      id: 'warm-up' as const,
+      name: 'Warm Up',
+      icon: <Zap className="h-5 w-5" />,
+      color: 'from-orange-400 to-pink-500',
+    },
+    {
+      id: 'arrays' as const,
+      name: 'Arrays',
+      icon: <Code2 className="h-5 w-5" />,
+      color: 'from-blue-400 to-indigo-600',
+    },
+    {
+      id: 'strings' as const,
+      name: 'Strings',
+      icon: <BookOpen className="h-5 w-5" />,
+      color: 'from-green-400 to-emerald-600',
+    },
+    {
+      id: 'linked-lists' as const,
+      name: 'Linked Lists',
+      icon: <Target className="h-5 w-5" />,
+      color: 'from-purple-400 to-violet-600',
+    },
   ]
 
   const subtopics: Record<TopicId, { id: string; name: string }[]> = {
     'warm-up': [
       { id: 'second-largest', name: 'Second Largest Element' },
-      { id: 'basics', name: 'Basic Operations' }
+      { id: 'basics', name: 'Basic Operations' },
     ],
-    'arrays': [
+    arrays: [
       { id: 'sorting', name: 'Sorting Algorithms' },
       { id: 'searching', name: 'Search Techniques' },
-      { id: 'two-pointers', name: 'Two Pointers' }
+      { id: 'two-pointers', name: 'Two Pointers' },
     ],
-    'strings': [
+    strings: [
       { id: 'pattern-matching', name: 'Pattern Matching' },
-      { id: 'palindromes', name: 'Palindromes' }
+      { id: 'palindromes', name: 'Palindromes' },
     ],
     'linked-lists': [
       { id: 'traversal', name: 'Traversal' },
-      { id: 'reversal', name: 'Reversal' }
-    ]
+      { id: 'reversal', name: 'Reversal' },
+    ],
   }
 
   useEffect(() => {
@@ -119,11 +136,13 @@ function App() {
       const modulePath = `./dsa/${topic}/${subtopic}/index.ts`
       const moduleLoader = modules[modulePath]
       if (moduleLoader) {
-        moduleLoader().then(() => {
-          console.log(`✅ Executed: ${modulePath}`)
-        }).catch((error) => {
-          console.error(`❌ Error importing ${modulePath}:`, error)
-        })
+        moduleLoader()
+          .then(() => {
+            console.log(`✅ Executed: ${modulePath}`)
+          })
+          .catch((error) => {
+            console.error(`❌ Error importing ${modulePath}:`, error)
+          })
       }
     }
   }, [topic, subtopic])
@@ -132,8 +151,8 @@ function App() {
     if (import.meta.hot) {
       // Accept updates for all module types
       import.meta.hot.accept(() => {
-        console.log("🔄 Hot update detected")
-        
+        console.log('🔄 Hot update detected')
+
         if (topic && subtopic) {
           // Reload README content
           const readmePath = `./dsa/${topic}/README.md`
@@ -160,23 +179,38 @@ function App() {
   }, [topic, subtopic])
 
   const socialLinks = [
-    { icon: <Github className="w-5 h-5" />, href: '#', label: 'GitHub', color: 'hover:text-gray-900' },
-    { icon: <Twitter className="w-5 h-5" />, href: '#', label: 'Twitter', color: 'hover:text-blue-500' },
-    { icon: <Linkedin className="w-5 h-5" />, href: '#', label: 'LinkedIn', color: 'hover:text-blue-700' }
+    {
+      icon: <Github className="h-5 w-5" />,
+      href: 'https://github.com/shubhamku044',
+      label: 'GitHub',
+      color: 'hover:text-gray-900',
+    },
+    {
+      icon: <Twitter className="h-5 w-5" />,
+      href: 'https://x.com/shubhamku044',
+      label: 'Twitter',
+      color: 'hover:text-blue-500',
+    },
+    {
+      icon: <Linkedin className="h-5 w-5" />,
+      href: 'https://linkedin.com/in/shubhamku044',
+      label: 'LinkedIn',
+      color: 'hover:text-blue-700',
+    },
   ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/80 backdrop-blur-md">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-2 rounded-xl">
-                <Code2 className="w-8 h-8 text-white" />
+              <div className="rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 p-2">
+                <Code2 className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <h1 className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-2xl font-bold text-transparent">
                   DSA Learning Hub
                 </h1>
                 <p className="text-sm text-gray-600">Master Data Structures & Algorithms</p>
@@ -188,8 +222,9 @@ function App() {
                 <a
                   key={idx}
                   href={link.href}
-                  className={`p-2 rounded-lg bg-gray-100 text-gray-600 transition-all duration-200 ${link.color} hover:bg-gray-200 hover:scale-110`}
+                  className={`rounded-lg bg-gray-100 p-2 text-gray-600 transition-all duration-200 ${link.color} hover:scale-110 hover:bg-gray-200`}
                   aria-label={link.label}
+                  target="_blank"
                 >
                   {link.icon}
                 </a>
@@ -199,16 +234,16 @@ function App() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Welcome Section */}
         {!topic && (
-          <div className="text-center mb-12">
-            <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1 rounded-2xl inline-block mb-6">
-              <div className="bg-white rounded-xl px-8 py-6">
-                <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <div className="mb-12 text-center">
+            <div className="mb-6 inline-block rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1">
+              <div className="rounded-xl bg-white px-8 py-6">
+                <h2 className="mb-4 text-4xl font-bold text-gray-900">
                   Welcome to Your DSA Journey! 🚀
                 </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <p className="mx-auto max-w-2xl text-lg text-gray-600">
                   Dive into the world of Data Structures and Algorithms with interactive examples,
                   comprehensive explanations, and hands-on coding practice.
                 </p>
@@ -219,11 +254,11 @@ function App() {
 
         {/* Topics Grid */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-            <BookOpen className="w-6 h-6 mr-2 text-indigo-600" />
+          <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
+            <BookOpen className="mr-2 h-6 w-6 text-indigo-600" />
             Choose Your Topic
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {topics.map((topicItem) => (
               <button
                 key={topicItem.id}
@@ -231,17 +266,18 @@ function App() {
                   setTopic(topicItem.id)
                   setSubtopic(null)
                 }}
-                className={`group relative overflow-hidden rounded-xl p-6 bg-gradient-to-r ${topicItem.color} text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${topic === topicItem.id ? 'ring-4 ring-white ring-opacity-50 scale-105' : ''
-                  }`}
+                className={`group relative overflow-hidden rounded-xl bg-gradient-to-r p-6 ${topicItem.color} text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                  topic === topicItem.id ? 'ring-opacity-50 scale-105 ring-4 ring-white' : ''
+                }`}
               >
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3 flex items-center justify-between">
                   {topicItem.icon}
-                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">
+                    <div className="h-3 w-3 rounded-full bg-white"></div>
                   </div>
                 </div>
-                <h4 className="font-semibold text-lg">{topicItem.name}</h4>
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <h4 className="text-lg font-semibold">{topicItem.name}</h4>
+                <div className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </button>
             ))}
           </div>
@@ -250,24 +286,30 @@ function App() {
         {/* Subtopics */}
         {topic && subtopics[topic] && (
           <div className="mb-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-              <Target className="w-6 h-6 mr-2 text-purple-600" />
-              Subtopics in {topics.find(t => t.id === topic)?.name}
+            <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
+              <Target className="mr-2 h-6 w-6 text-purple-600" />
+              Subtopics in {topics.find((t) => t.id === topic)?.name}
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {subtopics[topic].map((subtopicItem) => (
                 <button
                   key={subtopicItem.id}
                   onClick={() => setSubtopic(subtopicItem.id)}
-                  className={`group p-4 rounded-lg border-2 text-left transition-all duration-200 ${subtopic === subtopicItem.id
-                    ? 'border-indigo-500 bg-indigo-50 text-indigo-900'
-                    : 'border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50'
-                    }`}
+                  className={`group rounded-lg border-2 p-4 text-left transition-all duration-200 ${
+                    subtopic === subtopicItem.id
+                      ? 'border-indigo-500 bg-indigo-50 text-indigo-900'
+                      : 'border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50'
+                  }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium">{subtopicItem.name}</span>
-                    <div className={`w-3 h-3 rounded-full transition-colors ${subtopic === subtopicItem.id ? 'bg-indigo-500' : 'bg-gray-300 group-hover:bg-indigo-400'
-                      }`}></div>
+                    <div
+                      className={`h-3 w-3 rounded-full transition-colors ${
+                        subtopic === subtopicItem.id
+                          ? 'bg-indigo-500'
+                          : 'bg-gray-300 group-hover:bg-indigo-400'
+                      }`}
+                    ></div>
                   </div>
                 </button>
               ))}
@@ -277,10 +319,10 @@ function App() {
 
         {/* Content Area */}
         {readme && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                <BookOpen className="w-5 h-5 mr-2 text-indigo-600" />
+          <div className="overflow-hidden rounded-xl border border-gray-200/50 bg-white shadow-lg">
+            <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4">
+              <h3 className="flex items-center text-lg font-semibold text-gray-900">
+                <BookOpen className="mr-2 h-5 w-5 text-indigo-600" />
                 Documentation
               </h3>
             </div>
@@ -294,17 +336,16 @@ function App() {
         )}
 
         {/* Footer */}
-        <footer className="mt-16 py-8 border-t border-gray-200">
+        <footer className="mt-16 border-t border-gray-200 py-8">
           <div className="text-center">
-            <p className="text-gray-600 mb-4">
-              Built with ❤️ for the developer community
-            </p>
+            <p className="mb-4 text-gray-600">Built with ❤️ for the developer community</p>
             <div className="flex justify-center space-x-6">
               {socialLinks.map((link, idx) => (
                 <a
                   key={idx}
                   href={link.href}
                   className={`flex items-center space-x-2 text-gray-600 transition-colors ${link.color}`}
+                  target="_blank"
                 >
                   {link.icon}
                   <span className="text-sm font-medium">{link.label}</span>

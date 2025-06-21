@@ -1,4 +1,3 @@
-
 export function runStringManipulation() {
-  console.log('Running Strings -> Manipulation!');
+  console.log('Running Strings -> Manipulation!')
 }

@@ -1,11 +1,7 @@
-console.log("Find second largest number in an array")
-
 const arr = [4, 9, 0, 2, 8, 7, 1]
-console.log("Array:", arr)
-console.log("Expected output: 8")
-console.log("shubham")
-console.log("priyo")
+
 const findSecondLargest = (arr: number[]) => {
+  if (arr.length < 2) return -1
   let firstLargest = Number.NEGATIVE_INFINITY
   let secondLargest = Number.NEGATIVE_INFINITY
 
@@ -13,7 +9,7 @@ const findSecondLargest = (arr: number[]) => {
     if (num > firstLargest) {
       secondLargest = firstLargest
       firstLargest = num
-    } else if (num > secondLargest) {
+    } else if (num > secondLargest && num !== firstLargest) {
       secondLargest = num
     }
   })
@@ -21,4 +17,4 @@ const findSecondLargest = (arr: number[]) => {
   return secondLargest
 }
 
-console.log("Second largest number in arr:", arr, "is:", findSecondLargest(arr))
+console.log('Second largest number in arr:', arr, 'is:', findSecondLargest(arr))

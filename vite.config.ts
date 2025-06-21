@@ -7,14 +7,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     hmr: {
-      overlay: true
+      overlay: true,
     },
     watch: {
-      usePolling: true
-    }
+      usePolling: true,
+    },
   },
   optimizeDeps: {
-    include: ['marked', 'highlight.js']
+    include: ['marked', 'highlight.js'],
   },
-  assetsInclude: ['**/*.md']
+  assetsInclude: ['**/*.md'],
 })

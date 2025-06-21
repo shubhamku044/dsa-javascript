@@ -108,7 +108,7 @@ function App(): JSX.Element {
   useEffect(() => {
     const loadReadme = async (): Promise<void> => {
       if (topic && subtopic) {
-        const readmePath = `./dsa/${topic}/README.md`;
+        const readmePath = `./dsa/${topic}/${subtopic}/README.md`;
         try {
           const readmeContent = markdowns[readmePath] as string;
           if (readmeContent) {
@@ -129,6 +129,27 @@ function App(): JSX.Element {
             `Error loading README for ${topic}/${subtopic}:`,
             error,
           );
+          setReadme("");
+        }
+      } else if (topic) {
+        const readmePath = `./dsa/${topic}/README.md`;
+        try {
+          const readmeContent = markdowns[readmePath] as string;
+          if (readmeContent) {
+            const parsedContent = marked.parse(readmeContent);
+            console.log(`📄 Loaded README for ${topic}`);
+            if (typeof parsedContent === "string") {
+              setReadme(parsedContent);
+            } else {
+              console.warn("Parsed content is not string:", parsedContent);
+              setReadme("");
+            }
+          } else {
+            console.warn(`No content found for ${readmePath}`);
+            setReadme("");
+          }
+        } catch (error) {
+          console.error(`Error loading README for ${topic}:`, error);
           setReadme("");
         }
       }
@@ -281,6 +302,35 @@ function App(): JSX.Element {
             </div>
           </div>
         )}
+
+        <div className="mx-auto mt-12 max-w-3xl rounded-xl border border-gray-200 bg-white px-6 py-5 text-center shadow-md">
+          <p className="mb-2 text-gray-800">
+            📘 This project is built for my personal reference while learning
+            from the{" "}
+            <a
+              href="https://namastedev.com/learn/namaste-dsa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-600 underline hover:text-indigo-800"
+            >
+              Namaste DSA course
+            </a>{" "}
+            by Akshay Saini.
+          </p>
+          <p className="text-sm text-gray-600">
+            I created this to revise and practice DSA anywhere, anytime. If you
+            find it useful, check out the original course or{" "}
+            <a
+              href="https://github.com/shubhamku044/dsa-javascript"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-600 underline hover:text-indigo-800"
+            >
+              contribute on GitHub
+            </a>
+            .
+          </p>
+        </div>
         <Footer />
       </div>
     </div>

@@ -218,7 +218,6 @@ function App(): JSX.Element {
                   coding practice.
                 </p>
 
-                {/* 👇 Add this block below */}
                 <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-4 text-sm text-gray-700 shadow-inner">
                   <p className="mb-1">
                     📘 This project is built for my personal reference while
@@ -333,35 +332,6 @@ function App(): JSX.Element {
             </div>
           </div>
         )}
-
-        <div className="mx-auto mt-12 max-w-3xl rounded-xl border border-gray-200 bg-white px-6 py-5 text-center shadow-md">
-          <p className="mb-2 text-gray-800">
-            📘 This project is built for my personal reference while learning
-            from the{" "}
-            <a
-              href="https://namastedev.com/learn/namaste-dsa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-600 underline hover:text-indigo-800"
-            >
-              Namaste DSA course
-            </a>{" "}
-            by Akshay Saini.
-          </p>
-          <p className="text-sm text-gray-600">
-            I created this to revise and practice DSA anywhere, anytime. If you
-            find it useful, check out the original course or{" "}
-            <a
-              href="https://github.com/shubhamku044/dsa-javascript"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-600 underline hover:text-indigo-800"
-            >
-              contribute on GitHub
-            </a>
-            .
-          </p>
-        </div>
         <Footer />
       </div>
     </div>

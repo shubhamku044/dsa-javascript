@@ -1,13 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DSA</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>DSA Learning Hub - Master Data Structures & Algorithms | Namaste DSA Course Companion</title>
+  <meta name="title" content="DSA Learning Hub - Master Data Structures & Algorithms | Namaste DSA Course Companion" />
+  <meta name="description"
+    content="Master Data Structures & Algorithms with our comprehensive learning platform designed for Namaste DSA course students. Practice 17+ topics including arrays, linked lists, sorting algorithms, and more. Interactive examples, step-by-step solutions, and interview preparation for software engineering roles." />
+  <meta name="keywords"
+    content="data structures, algorithms, DSA, Namaste DSA, Akshay Saini, programming, coding interview, software engineering, JavaScript DSA, arrays, linked lists, binary search, sorting algorithms, leetcode, coding practice, technical interview prep, computer science, programming tutorial" />
+  <meta name="author" content="Shubham Kumar - DSA Learning Hub" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="language" content="en-US" />
+  <meta name="revisit-after" content="3 days" />
+  <meta name="rating" content="general" />
+  <meta name="distribution" content="global" />
+  <meta name="coverage" content="worldwide" />
+  <meta name="target" content="all" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
+
+  <link rel="canonical" href="https://shubhamku044.github.io/dsa-javascript/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DSA Learning Hub" />
+  <meta property="og:title" content="DSA Learning Hub - Master Data Structures & Algorithms | Namaste DSA Course" />
+  <meta property="og:description"
+    content="Comprehensive DSA learning platform for Namaste DSA course students. Master 17+ topics with interactive examples, solutions, and interview preparation. Perfect for software engineering roles!" />
+  <meta property="og:url" content="https://shubhamku044.github.io/dsa-javascript/" />
+  <meta property="og:image" content="https://shubhamku044.github.io/dsa-javascript/src/assets/preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt"
+    content="DSA Learning Hub - Comprehensive platform for mastering Data Structures and Algorithms" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="article:author" content="Shubham Kumar" />
+  <meta property="article:section" content="Education" />
+  <meta property="article:tag" content="DSA, Data Structures, Algorithms, Programming, Coding Interview" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@shubhamku044" />
+  <meta name="twitter:creator" content="@shubhamku044" />
+  <meta name="twitter:title" content="DSA Learning Hub - Master Data Structures & Algorithms | Namaste DSA Course" />
+  <meta name="twitter:description"
+    content="Comprehensive DSA learning platform for Namaste DSA course students. Master 17+ topics with interactive examples, solutions, and interview preparation. Perfect for software engineering roles!" />
+  <meta name="twitter:image" content="https://shubhamku044.github.io/dsa-javascript/src/assets/preview.png" />
+  <meta name="twitter:image:alt"
+    content="DSA Learning Hub - Comprehensive platform for mastering Data Structures and Algorithms" />
+  <meta name="twitter:url" content="https://shubhamku044.github.io/dsa-javascript/" />
+
+  <meta property="linkedin:owner" content="shubhamku044" />
+
+  <meta name="theme-color" content="#6366f1" />
+  <meta name="msapplication-TileColor" content="#6366f1" />
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="DSA Learning Hub" />
+  <meta name="application-name" content="DSA Learning Hub" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6366f1" />
+
+  <link rel="preconnect" href="https://api.github.com" />
+  <link rel="preconnect" href="https://github.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="dns-prefetch" href="https://api.github.com" />
+  <link rel="dns-prefetch" href="https://github.com" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "DSA Learning Hub",
+      "description": "Comprehensive DSA learning platform for Namaste DSA course students. Master data structures and algorithms with interactive examples and interview preparation.",
+      "url": "https://shubhamku044.github.io/dsa-javascript/",
+      "author": {
+        "@type": "Person",
+        "name": "Shubham Kumar",
+        "url": "https://github.com/shubhamku044"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "DSA Learning Hub",
+        "url": "https://shubhamku044.github.io/dsa-javascript/"
+      },
+      "educationalUse": "Programming Education",
+      "teaches": ["Data Structures", "Algorithms", "JavaScript Programming", "Technical Interview Preparation"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "inLanguage": "en-US",
+      "keywords": "DSA, Data Structures, Algorithms, Programming, Coding Interview, JavaScript, Namaste DSA",
+      "mainEntity": {
+        "@type": "Course",
+        "name": "Data Structures and Algorithms Learning Path",
+        "description": "Complete learning path for mastering DSA concepts with practical examples",
+        "provider": {
+          "@type": "Organization",
+          "name": "DSA Learning Hub"
+        }
+      }
+    }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

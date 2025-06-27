@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://shubhamku044.github.io/dsa-javascript/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow paths (if any)
+# Disallow: /private/
+
+# Allow important resources
+Allow: /src/assets/
+Allow: /favicon*
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+
+# SEO friendly rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: / 

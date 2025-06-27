@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+   
+   <!-- Homepage -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+   </url>
+   
+   <!-- Warm-up Problems -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#warm-up</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   
+   <!-- Arrays Level 0 -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#arrays-level-0</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.9</priority>
+   </url>
+   
+   <!-- Linked List Level 0 -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#linked-list-level-0</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.9</priority>
+   </url>
+   
+   <!-- Searching and Sorting Level 0 -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#searching-and-sorting-level-0</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.9</priority>
+   </url>
+   
+   <!-- Strings -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#strings</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   
+   <!-- Individual Problem Pages -->
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#count-digits</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#palindrome-number</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#reverse-number</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#second-largest</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#star-pattern</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#remove-duplicates</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#remove-element</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#reverse-string</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#best-time-buy-and-sell-stock</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#design-linked-list</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#linked-list-cycle</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#middle-of-linked-list</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#reverse-linked-list</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#binary-search</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#bubble-sort</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#insertion-sort</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#selection-sort</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <url>
+      <loc>https://shubhamku044.github.io/dsa-javascript/#manipulation</loc>
+      <lastmod>2025-01-09</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+</urlset> 

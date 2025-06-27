@@ -1,3 +1,5 @@
+import { ListNode } from '../../types'
+
 /**
  * Definition for singly-linked list.
  * class ListNode {

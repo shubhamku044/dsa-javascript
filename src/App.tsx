@@ -2,7 +2,7 @@ import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown-light.css";
 
 import hljs from "highlight.js";
-import { BookOpen, Target, Zap } from "lucide-react";
+import { BookOpen, Code2, Link,Search, Target, Zap } from "lucide-react";
 import type { Tokens } from "marked";
 import { marked } from "marked";
 import { type JSX, useEffect, useState } from "react";
@@ -16,7 +16,7 @@ const markdowns = import.meta.glob("./dsa/**/*.md", {
 
 const modules = import.meta.glob("./dsa/**/*.ts", { eager: false });
 
-type TopicId = "warm-up" | "arrays" | "strings" | "linked-lists";
+type TopicId = "warm-up" | "arrays-level-0" | "strings" | "linked-list-level-0" | "searching-and-sorting-level-0";
 
 const renderer = new marked.Renderer();
 renderer.code = function ({ text, lang }: Tokens.Code): string {
@@ -55,24 +55,30 @@ function App(): JSX.Element {
       icon: <Zap className="h-5 w-5" />,
       color: "from-orange-400 to-pink-500",
     },
-    // {
-    //   id: "arrays" as const,
-    //   name: "Arrays",
-    //   icon: <Code2 className="h-5 w-5" />,
-    //   color: "from-blue-400 to-indigo-600",
-    // },
-    // {
-    //   id: "strings" as const,
-    //   name: "Strings",
-    //   icon: <BookOpen className="h-5 w-5" />,
-    //   color: "from-green-400 to-emerald-600",
-    // },
-    // {
-    //   id: "linked-lists" as const,
-    //   name: "Linked Lists",
-    //   icon: <Target className="h-5 w-5" />,
-    //   color: "from-purple-400 to-violet-600",
-    // },
+    {
+      id: "arrays-level-0" as const,
+      name: "Arrays (Level 0)",
+      icon: <Code2 className="h-5 w-5" />,
+      color: "from-blue-400 to-indigo-600",
+    },
+    {
+      id: "linked-list-level-0" as const,
+      name: "Linked Lists (Level 0)",
+      icon: <Link className="h-5 w-5" />,
+      color: "from-purple-400 to-violet-600",
+    },
+    {
+      id: "searching-and-sorting-level-0" as const,
+      name: "Search & Sort (Level 0)",
+      icon: <Search className="h-5 w-5" />,
+      color: "from-green-400 to-emerald-600",
+    },
+    {
+      id: "strings" as const,
+      name: "Strings",
+      icon: <BookOpen className="h-5 w-5" />,
+      color: "from-cyan-400 to-teal-600",
+    },
   ];
 
   const subtopics: Record<TopicId, { id: string; name: string }[]> = {
@@ -83,18 +89,26 @@ function App(): JSX.Element {
       { id: "palindrome-number", name: "Palindrome Number" },
       { id: "reverse-number", name: "Reverse Number" },
     ],
-    arrays: [
-      { id: "sorting", name: "Sorting Algorithms" },
-      { id: "searching", name: "Search Techniques" },
-      { id: "two-pointers", name: "Two Pointers" },
+    "arrays-level-0": [
+      { id: "best-time-buy-and-sell-stock", name: "Best Time to Buy and Sell Stock" },
+      { id: "remove-duplicates", name: "Remove Duplicates from Sorted Array" },
+      { id: "remove-element", name: "Remove Element" },
+      { id: "reverse-string", name: "Reverse String" },
+    ],
+    "linked-list-level-0": [
+      { id: "design-linked-list", name: "Design Linked List" },
+      { id: "linked-list-cycle", name: "Linked List Cycle" },
+      { id: "middle-of-linked-list", name: "Middle of the Linked List" },
+      { id: "reverse-linked-list", name: "Reverse Linked List" },
+    ],
+    "searching-and-sorting-level-0": [
+      { id: "binary-search", name: "Binary Search" },
+      { id: "bubble-sort", name: "Bubble Sort" },
+      { id: "insertion-sort", name: "Insertion Sort" },
+      { id: "selection-sort", name: "Selection Sort" },
     ],
     strings: [
-      { id: "pattern-matching", name: "Pattern Matching" },
-      { id: "palindromes", name: "Palindromes" },
-    ],
-    "linked-lists": [
-      { id: "traversal", name: "Traversal" },
-      { id: "reversal", name: "Reversal" },
+      { id: "manipulation", name: "String Manipulation" },
     ],
   };
 

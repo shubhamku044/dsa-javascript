@@ -1,5 +1,7 @@
-import { Code2, Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter } from "lucide-react";
 import type { JSX } from "react";
+
+import { GitHubStarButton } from "./GitHubStarButton";
 
 const socialLinks = [
   {
@@ -22,39 +24,53 @@ const socialLinks = [
   },
 ];
 
-export function Header(): JSX.Element {
+export const Header = (): JSX.Element => {
+  const handleLogoClick = () => {
+    window.location.hash = '';
+    window.location.reload();
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/80 backdrop-blur-md">
+    <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 p-2">
-              <Code2 className="h-8 w-8 text-white" />
+          <button
+            onClick={handleLogoClick}
+            className="flex items-center gap-3 transition-all duration-200 hover:opacity-80 cursor-pointer"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600">
+              <span className="text-lg font-bold text-white">🧠</span>
             </div>
-            <div>
-              <h1 className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-2xl font-bold text-transparent">
+            <div className="text-left">
+              <h1 className="text-xl font-bold text-gray-900">
                 DSA Learning Hub
               </h1>
-              <p className="text-sm text-gray-600">
-                Master Data Structures & Algorithms
+              <p className="text-xs text-gray-500">
+                Namaste DSA Course Companion
               </p>
             </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            {socialLinks.map((link, idx) => (
-              <a
-                key={idx}
-                href={link.href}
-                className={`rounded-lg bg-gray-100 p-2 text-gray-600 transition-all duration-200 ${link.color} hover:scale-110 hover:bg-gray-200`}
-                aria-label={link.label}
-                target="_blank"
-              >
-                {link.icon}
-              </a>
-            ))}
+          </button>
+
+          <div className="flex items-center gap-4">
+            <GitHubStarButton />
+            
+            <div className="hidden sm:flex items-center gap-2">
+              {socialLinks.map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link.href}
+                  className={`rounded-lg bg-gray-100 p-2 text-gray-600 transition-all duration-200 ${link.color} hover:scale-110 hover:bg-gray-200`}
+                  aria-label={link.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </header>
   );
-}
+};

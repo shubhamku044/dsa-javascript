@@ -7,7 +7,7 @@ import type { Tokens } from "marked";
 import { marked } from "marked";
 import { type JSX, useEffect, useState } from "react";
 
-import { Footer, Header } from "./components";
+import { Footer, Header, HeroSection } from "./components";
 
 const markdowns = import.meta.glob("./dsa/**/*.md", {
   as: "raw",
@@ -218,138 +218,132 @@ function App(): JSX.Element {
   }, [topic, subtopic]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen bg-white">
       <Header />
+      
+      {!topic && <HeroSection />}
+      
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {
-          <div className="mb-12 text-center">
-            <div className="mb-6 inline-block rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1">
-              <div className="rounded-xl bg-white px-8 py-6">
-                <h2 className="mb-4 text-4xl font-bold text-gray-900">
-                  Welcome to Your DSA Journey! 🚀
-                </h2>
-                <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                  Dive into the world of Data Structures and Algorithms with
-                  interactive examples, comprehensive explanations, and hands-on
-                  coding practice.
-                </p>
-
-                <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-4 text-sm text-gray-700 shadow-inner">
-                  <p className="mb-1">
-                    📘 This project is built for my personal reference while
-                    learning from the{" "}
-                    <a
-                      href="https://namastedev.com/learn/namaste-dsa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-indigo-600 underline hover:text-indigo-800"
-                    >
-                      Namaste DSA course
-                    </a>{" "}
-                    by Akshay Saini.
-                  </p>
-                  <p>
-                    I created this to revise and practice DSA anywhere, anytime.
-                    If you find it useful, consider checking out the course or{" "}
-                    <a
-                      href="https://github.com/shubhamku044/dsa-javascript"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-indigo-600 underline hover:text-indigo-800"
-                    >
-                      contributing on GitHub
-                    </a>
-                    .
-                  </p>
-                </div>
+        {topic && (
+          <>
+            <div className="mb-8">
+              <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
+                <BookOpen className="mr-2 h-6 w-6 text-indigo-600" />
+                Choose Your Topic
+              </h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {topics.map((topicItem) => (
+                  <button
+                    key={topicItem.id}
+                    onClick={() => {
+                      setTopic(topicItem.id);
+                      setSubtopic(null);
+                    }}
+                    className={`group relative overflow-hidden rounded-xl bg-gradient-to-r p-6 ${topicItem.color} text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                      topic === topicItem.id
+                        ? "ring-opacity-50 scale-105 ring-4 ring-white"
+                        : ""
+                    }`}
+                  >
+                    <div className="mb-3 flex items-center justify-between">
+                      {topicItem.icon}
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">
+                        <div className="h-3 w-3 rounded-full bg-white"></div>
+                      </div>
+                    </div>
+                    <h4 className="text-lg font-semibold">{topicItem.name}</h4>
+                    <div className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                  </button>
+                ))}
               </div>
             </div>
-          </div>
-        }
 
-        <div className="mb-8">
-          <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
-            <BookOpen className="mr-2 h-6 w-6 text-indigo-600" />
-            Choose Your Topic
-          </h3>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {topics.map((topicItem) => (
-              <button
-                key={topicItem.id}
-                onClick={() => {
-                  setTopic(topicItem.id);
-                  setSubtopic(null);
-                }}
-                className={`group relative overflow-hidden rounded-xl bg-gradient-to-r p-6 ${topicItem.color} text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                  topic === topicItem.id
-                    ? "ring-opacity-50 scale-105 ring-4 ring-white"
-                    : ""
-                }`}
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  {topicItem.icon}
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">
-                    <div className="h-3 w-3 rounded-full bg-white"></div>
-                  </div>
+            {topic && subtopics[topic] && (
+              <div className="mb-8">
+                <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
+                  <Target className="mr-2 h-6 w-6 text-purple-600" />
+                  Subtopics in {topics.find((t) => t.id === topic)?.name}
+                </h3>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {subtopics[topic].map((subtopicItem) => (
+                    <button
+                      key={subtopicItem.id}
+                      onClick={() => setSubtopic(subtopicItem.id)}
+                      className={`group rounded-lg border-2 p-4 text-left transition-all duration-200 ${
+                        subtopic === subtopicItem.id
+                          ? "border-indigo-500 bg-indigo-50 text-indigo-900"
+                          : "border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium">{subtopicItem.name}</span>
+                        <div
+                          className={`h-3 w-3 rounded-full transition-colors ${
+                            subtopic === subtopicItem.id
+                              ? "bg-indigo-500"
+                              : "bg-gray-300 group-hover:bg-indigo-400"
+                          }`}
+                        ></div>
+                      </div>
+                    </button>
+                  ))}
                 </div>
-                <h4 className="text-lg font-semibold">{topicItem.name}</h4>
-                <div className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-              </button>
-            ))}
-          </div>
-        </div>
+              </div>
+            )}
 
-        {topic && subtopics[topic] && (
+            {readme && (
+              <div className="overflow-hidden rounded-xl border border-gray-200/50 bg-white shadow-lg mb-12">
+                <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4">
+                  <h3 className="flex items-center text-lg font-semibold text-gray-900">
+                    <BookOpen className="mr-2 h-5 w-5 text-indigo-600" />
+                    Documentation
+                  </h3>
+                </div>
+                <div className="p-6">
+                  <div
+                    className="markdown-body prose prose-lg max-w-none"
+                    dangerouslySetInnerHTML={{ __html: readme }}
+                  />
+                </div>
+              </div>
+            )}
+            
+            <Footer />
+          </>
+        )}
+        
+        {!topic && (
           <div className="mb-8">
             <h3 className="mb-6 flex items-center text-xl font-semibold text-gray-900">
-              <Target className="mr-2 h-6 w-6 text-purple-600" />
-              Subtopics in {topics.find((t) => t.id === topic)?.name}
+              <BookOpen className="mr-2 h-6 w-6 text-indigo-600" />
+              Choose Your Topic
             </h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {subtopics[topic].map((subtopicItem) => (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {topics.map((topicItem) => (
                 <button
-                  key={subtopicItem.id}
-                  onClick={() => setSubtopic(subtopicItem.id)}
-                  className={`group rounded-lg border-2 p-4 text-left transition-all duration-200 ${
-                    subtopic === subtopicItem.id
-                      ? "border-indigo-500 bg-indigo-50 text-indigo-900"
-                      : "border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50"
-                  }`}
+                  key={topicItem.id}
+                  onClick={() => {
+                    setTopic(topicItem.id);
+                    setSubtopic(null);
+                  }}
+                  className={`group relative overflow-hidden rounded-xl bg-gradient-to-r p-6 ${topicItem.color} text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">{subtopicItem.name}</span>
-                    <div
-                      className={`h-3 w-3 rounded-full transition-colors ${
-                        subtopic === subtopicItem.id
-                          ? "bg-indigo-500"
-                          : "bg-gray-300 group-hover:bg-indigo-400"
-                      }`}
-                    ></div>
+                  <div className="mb-3 flex items-center justify-between">
+                    {topicItem.icon}
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">
+                      <div className="h-3 w-3 rounded-full bg-white"></div>
+                    </div>
                   </div>
+                  <h4 className="text-lg font-semibold">{topicItem.name}</h4>
+                  <div className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </button>
               ))}
             </div>
           </div>
         )}
-
-        {readme && (
-          <div className="overflow-hidden rounded-xl border border-gray-200/50 bg-white shadow-lg">
-            <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4">
-              <h3 className="flex items-center text-lg font-semibold text-gray-900">
-                <BookOpen className="mr-2 h-5 w-5 text-indigo-600" />
-                Documentation
-              </h3>
-            </div>
-            <div className="p-6">
-              <div
-                className="markdown-body prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: readme }}
-              />
-            </div>
-          </div>
-        )}
-        <Footer />
       </div>
+      
+      {!topic && <Footer />}
     </div>
   );
 }
